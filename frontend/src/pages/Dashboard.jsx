@@ -60,7 +60,7 @@ function Dashboard() {
 
         try {
           const response = await fetch(
-            `http://localhost:5000/api/applied-jobs/${id}`,
+            `/api/applied-jobs/${id}`,
             {
               method: "GET",
               headers: {
@@ -104,7 +104,7 @@ function Dashboard() {
 
         try {
           const resumeResponse = await fetch(
-            `http://localhost:5000/api/resume/${id}`,
+            `/api/resume/${id}`,
             {
               method: "GET",
               headers: {
@@ -238,7 +238,7 @@ function Dashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/applied-jobs/${userId}/${jobId}`,
+        `/api/applied-jobs/${userId}/${jobId}`,
         {
           method: "DELETE",
           headers: {

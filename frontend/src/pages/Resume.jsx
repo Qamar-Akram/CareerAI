@@ -49,7 +49,7 @@ function Resume() {
 
       try {
         const response = await fetch(
-          `http://localhost:5000/api/resume/${user.id}`,
+          `/api/resume/${user.id}`,
           {
             method: "GET",
             headers: {
@@ -253,7 +253,7 @@ function Resume() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/resume",
+        "/api/resume",
         {
           method: "POST",
           headers: {
@@ -316,7 +316,7 @@ function Resume() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/resume",
+        "/api/resume",
         {
           method: "POST",
           headers: {
@@ -370,7 +370,7 @@ function Resume() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/resume/${user.id}`,
+        `/api/resume/${user.id}`,
         {
           method: "GET",
           headers: {

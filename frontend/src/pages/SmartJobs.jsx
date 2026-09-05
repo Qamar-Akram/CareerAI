@@ -28,7 +28,7 @@ function SmartJobs() {
         setLoading(true);
 
         const response = await fetch(
-          "http://localhost:5000/api/jobs"
+          "/api/jobs"
         );
 
         if (!response.ok) {
@@ -88,7 +88,7 @@ function SmartJobs() {
         }
 
         const response = await fetch(
-          `http://localhost:5000/api/applied-jobs/${userId}`,
+          `/api/applied-jobs/${userId}`,
           {
             method: "GET",
             headers: {
@@ -281,7 +281,7 @@ function SmartJobs() {
       // ===============================
 
       const response = await fetch(
-        `http://localhost:5000/api/jobs/${job.id}/apply`,
+        `/api/jobs/${job.id}/apply`,
         {
           method: "POST",
 

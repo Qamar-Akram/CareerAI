@@ -16,6 +16,45 @@ app.use(cors());
 app.use(express.json());
 
 
+
+// ===============================
+// VERCEL SERVERLESS MONGODB
+// ===============================
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) return;
+
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI is not set");
+  }
+
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not set");
+  }
+
+  await mongoose.connect(process.env.MONGO_URI);
+  isConnected = true;
+
+  console.log("✅ MongoDB Connected Successfully");
+};
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("❌ MongoDB Connection Error:", error.message);
+
+    res.status(500).json({
+      message: "Database connection failed",
+      error: error.message
+    });
+  }
+});
+
+
+
 // ===============================
 // USER SCHEMA
 // ===============================
@@ -913,65 +952,6 @@ app.get(
 
 
 // ===============================
-// MONGODB CONNECTION
+// VERCEL EXPORT
 // ===============================
-
-const PORT = 5000;
-
-console.log(
-  "🔄 Trying to connect to MongoDB..."
-);
-
-
-if (!process.env.MONGO_URI) {
-
-  console.error(
-    "❌ MONGO_URI is not found in .env file."
-  );
-
-} else if (!process.env.JWT_SECRET) {
-
-  console.error(
-    "❌ JWT_SECRET is not found in .env file."
-  );
-
-} else {
-
-  console.log(
-    "📡 Using connection string: ✅ Set"
-  );
-
-  mongoose
-    .connect(
-      process.env.MONGO_URI
-    )
-
-    .then(() => {
-
-      console.log(
-        "✅ MongoDB Connected Successfully"
-      );
-
-      app.listen(
-        PORT,
-        () => {
-
-          console.log(
-            `🚀 Server running on http://localhost:${PORT}`
-          );
-
-        }
-      );
-
-    })
-
-    .catch((error) => {
-
-      console.error(
-        "❌ MongoDB Connection Error:",
-        error.message
-      );
-
-    });
-}
-
+module.exports = app;

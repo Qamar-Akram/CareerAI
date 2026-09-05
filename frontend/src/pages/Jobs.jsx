@@ -31,7 +31,7 @@ function Jobs() {
   // ===============================
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/jobs")
+    fetch("/api/jobs")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch jobs");
@@ -62,7 +62,7 @@ function Jobs() {
     }
 
     fetch(
-      `http://localhost:5000/api/applied-jobs/${user.id}`,
+      `/api/applied-jobs/${user.id}`,
       {
         method: "GET",
         headers: {
@@ -162,7 +162,7 @@ function Jobs() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/jobs/${job.id}/apply`,
+        `/api/jobs/${job.id}/apply`,
         {
           method: "POST",
           headers: {
